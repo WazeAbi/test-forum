@@ -1,6 +1,8 @@
 services:
   api:
-    image: ghcr.io/mindsek/anonymous-forum-2/api:latest
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     ports:
       - "3001:3001"
     depends_on:
@@ -29,7 +31,9 @@ services:
     networks:
       - internal
   thread:
-    image: ghcr.io/mindsek/anonymous-forum-2/thread:latest
+    build:
+      context: ./thread
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -39,7 +43,9 @@ services:
     networks:
       - internal
   sender:
-    image: ghcr.io/mindsek/anonymous-forum-2/sender:latest
+    build:
+      context: ./sender
+      dockerfile: Dockerfile
     ports:
       - "3002:3002"
     environment:
