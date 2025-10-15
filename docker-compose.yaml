@@ -1,0 +1,55 @@
+services:
+  api:
+    image: ghcr.io/mindsek/anonymous-forum-2/api:latest
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:unVraiMotDePasseUltraSolide@postgres:5432/forum
+    networks:
+      - internal
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=unVraiMotDePasseUltraSolide
+      - POSTGRES_DB=forum
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+  thread:
+    image: ghcr.io/mindsek/anonymous-forum-2/thread:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - API_URL=http://api:3001
+    depends_on:
+      - api
+    networks:
+      - internal
+  sender:
+    image: ghcr.io/mindsek/anonymous-forum-2/sender:latest
+    ports:
+      - "3002:3002"
+    environment:
+      - API_URL=http://api:3001
+    depends_on:
+      - api
+    networks:
+      - internal
+volumes:
+  postgres-data:
+networks:
+  internal:
+    driver: bridge
