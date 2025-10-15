@@ -2,7 +2,7 @@ services:
   api:
     build:
       context: ./api
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "3001:3001"
     depends_on:
@@ -33,7 +33,7 @@ services:
   thread:
     build:
       context: ./thread
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -45,7 +45,7 @@ services:
   sender:
     build:
       context: ./sender
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "3002:3002"
     environment:

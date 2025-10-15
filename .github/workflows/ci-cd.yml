@@ -60,7 +60,7 @@ jobs:
         run: npm install
 
       - name: Start services for testing
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Wait for services
         run: |
@@ -87,7 +87,7 @@ jobs:
           fi
 
       - name: Stop services
-        run: docker-compose down
+        run: docker compose down
 
   build:
     runs-on: ubuntu-latest
