@@ -68,9 +68,9 @@ resource "aws_security_group" "web" {
 
 # Instance EC2
 resource "aws_instance" "web" {
-  ami = "ami-0e067cc8a2b58de59"  # Ubuntu 24.04 LTS
+  ami = "ami-0a0e5d9c7acc336f1"  # Ubuntu 22.04 LTS pour eu-west-3
   key_name        = aws_key_pair.deployer.key_name
-instance_type = "t3.micro"
+  instance_type   = "t3.micro"
 
   security_groups = [aws_security_group.web.name]
 

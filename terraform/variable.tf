@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "eu-central-1"
+  default     = "eu-west-3"
 }
 
 variable "project_name" {
@@ -9,15 +9,13 @@ variable "project_name" {
   type        = string
   default     = "test-forum"
 }
-
-variable "app_port" {
-  description = "Port exposed by the docker image"
-  type        = number
-  default     = 3000
-}
-
 variable "db_password" {
   description = "Password for RDS database"
   type        = string
   sensitive   = true
+}
+variable "image_tag" {
+  description = "Docker image tag to deploy"
+  type        = string
+  default     = "latest"
 }
